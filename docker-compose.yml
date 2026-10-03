@@ -1,0 +1,30 @@
+# Production-style stack: PostgreSQL + Smart Tutor (API + web UI on one port).
+#   cp backend/.env.example .env   (set SECRET_KEY and an API key)
+#   docker compose up --build      -> http://localhost:8000
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: tutor
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-tutor}
+      POSTGRES_DB: smarttutor
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tutor -d smarttutor"]
+      interval: 5s
+      retries: 10
+    restart: unless-stopped
+
+  app:
+    build: .
+    depends_on:
+      db: { condition: service_healthy }
+    env_file: [.env]
+    environment:
+      DATABASE_URL: postgresql+psycopg2://tutor:${POSTGRES_PASSWORD:-tutor}@db:5432/smarttutor
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:8000}
+    ports: ["8000:8000"]
+    restart: unless-stopped
+
+volumes:
+  pgdata:

@@ -1,0 +1,26 @@
+# Render Blueprint: one-click deploy of Smart Tutor (Docker web service, free plan).
+# Database: create a free Neon PostgreSQL (https://neon.com) and paste its URL as DATABASE_URL.
+services:
+  - type: web
+    name: smart-tutor
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    autoDeploy: true            # every push to the main branch redeploys the site
+    envVars:
+      - key: DATABASE_URL
+        sync: false             # paste your Neon connection string in the Render dashboard
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WORKERS
+        value: "1"              # free instance has 512 MB RAM
+      - key: LLM_PROVIDER
+        value: auto
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: TEACHER_INVITE_CODE
+        sync: false
+      - key: SEED_DEMO_STUDENTS
+        value: "true"
