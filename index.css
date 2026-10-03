@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .card { @apply bg-white rounded-2xl border border-slate-200 shadow-sm; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700; }
+  .btn-ghost { @apply btn bg-white border border-slate-200 text-slate-700 hover:bg-slate-50; }
+  .btn-danger { @apply btn bg-rose-50 text-rose-700 hover:bg-rose-100; }
+  .input { @apply w-full rounded-xl border border-slate-300 px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100; }
+  .label { @apply block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-1; }
+  .h1 { @apply text-2xl font-bold text-slate-900; }
+  .h2 { @apply text-base font-semibold text-slate-900; }
+  .muted { @apply text-sm text-slate-500; }
+}
+
+.prose-tutor h1 { @apply text-2xl font-bold mb-3 text-slate-900; }
+.prose-tutor h2 { @apply text-lg font-semibold mt-6 mb-2 text-slate-900; }
+.prose-tutor h3 { @apply font-semibold mt-4 mb-1; }
+.prose-tutor p { @apply my-2 leading-7 text-slate-700; }
+.prose-tutor ul { @apply list-disc pl-6 my-2 space-y-1 text-slate-700; }
+.prose-tutor ol { @apply list-decimal pl-6 my-2 space-y-1 text-slate-700; }
+.prose-tutor code { @apply bg-slate-100 text-brand-700 rounded px-1 py-0.5 text-[0.85em]; }
+.prose-tutor pre { @apply bg-slate-900 text-slate-100 rounded-xl p-4 my-3 overflow-x-auto text-sm; }
+.prose-tutor pre code { @apply bg-transparent text-slate-100 p-0; }
+.prose-tutor strong { @apply text-slate-900; }
+.prose-tutor hr { @apply my-6 border-slate-200; }
+.prose-tutor table { @apply my-3 text-sm; }
+.prose-tutor td, .prose-tutor th { @apply border border-slate-200 px-2 py-1; }
